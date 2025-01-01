@@ -8,7 +8,6 @@ import {
   DocumentTextIcon, 
   UserIcon, 
   TagIcon, 
-  MagnifyingGlassIcon 
 } from '@heroicons/vue/24/outline'
 
 const router = useRouter()
@@ -105,21 +104,7 @@ const popularTags = ref([
           <span class="sr-only">打开侧边栏</span>
           <Bars3Icon class="h-6 w-6" />
         </button>
-        <div class="flex flex-1 justify-between px-4">
-          <div class="flex flex-1">
-            <div class="flex w-full md:ml-0">
-              <div class="relative w-full max-w-2xl my-3.5">
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <MagnifyingGlassIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                </div>
-                <input
-                  type="search"
-                  placeholder="搜索文章..."
-                  class="block w-full rounded-md border-0 py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-          </div>
+        <div class="flex flex-1 justify-end px-4">
           <div class="ml-4 flex items-center md:ml-6">
             <slot name="header-actions"></slot>
           </div>
@@ -178,7 +163,7 @@ const popularTags = ref([
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .router-link-active {
   @apply bg-gray-100 text-gray-900;
 }
