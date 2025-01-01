@@ -79,7 +79,7 @@ export function useAuth() {
     if (!token.value) return false
     
     try {
-      const response = await api.get('/auth/user/')
+      const response = await api.get('/auth/user_info/')
       user.value = response.data
       localStorage.setItem('user', JSON.stringify(user.value))
       return true
@@ -93,6 +93,21 @@ export function useAuth() {
     }
   }
 
+  const changePassword = async (oldPassword, newPassword) => {
+    try {
+      const response = await api.post('/auth/change_password/', {
+        old_password: oldPassword,
+        new_password: newPassword
+      })
+      return { success: true, message: response.data.message }
+    } catch (error) {
+      return { 
+        success: false, 
+        message: error.response?.data?.error || '修改密码失败'
+      }
+    }
+  }
+
   return {
     user,
     isAuthenticated,
@@ -101,6 +116,7 @@ export function useAuth() {
     register,
     logout,
     checkAuth,
+    changePassword,
     api
   }
 } 

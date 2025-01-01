@@ -3,8 +3,13 @@ import { useAuth } from './useAuth'
 export function useApi() {
   const { api } = useAuth()
 
-  const getPosts = async () => {
-    const response = await api.get('/posts/')
+  const post = async (url, data) => {
+    const response = await api.post(url, data)
+    return response.data
+  }
+
+  const getPosts = async (params = '') => {
+    const response = await api.get(`/posts/${params}`)
     return response.data
   }
 
@@ -37,14 +42,21 @@ export function useApi() {
     return response.data
   }
 
+  const getTags = async () => {
+    const response = await api.get('/posts/tags/')
+    return response.data
+  }
+
   return {
     api,
+    post,
     getPosts,
     getPost,
     createPost,
     updatePost,
     deletePost,
     getPublishedPosts,
-    getDrafts
+    getDrafts,
+    getTags
   }
 } 

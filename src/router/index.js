@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
+import ChangePassword from '../components/ChangePassword.vue'
 
 const routes = [
   {
@@ -49,6 +50,12 @@ const routes = [
     name: 'edit-post',
     component: () => import('../views/PostEditorView.vue'),
     meta: { requiresAuth: true, requiresAdmin: true }
+  },
+  {
+    path: '/change-password',
+    name: 'ChangePassword',
+    component: ChangePassword,
+    meta: { requiresAuth: true }
   }
 ]
 

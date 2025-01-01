@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuth } from '../composables/useAuth'
 import { 
   Bars3Icon, 
   XMarkIcon, 
@@ -9,9 +10,12 @@ import {
   UserIcon, 
   TagIcon, 
 } from '@heroicons/vue/24/outline'
+import RightSidebar from './RightSidebar.vue'
 
 const router = useRouter()
+const { isAuthenticated } = useAuth()
 const sidebarOpen = ref(false)
+const isUserMenuOpen = ref(false)
 
 const navigation = [
   { name: '首页', to: '/', icon: HomeIcon },
@@ -122,39 +126,7 @@ const popularTags = ref([
               </div>
               
               <!-- Right sidebar -->
-              <aside class="hidden xl:block xl:pl-8 xl:w-96">
-                <div class="sticky top-24">
-                  <!-- Recent posts -->
-                  <section class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                    <h2 class="text-lg font-medium text-gray-900 mb-4">最近文章</h2>
-                    <ul class="space-y-3">
-                      <li v-for="post in recentPosts" :key="post.slug">
-                        <router-link
-                          :to="{ name: 'post-detail', params: { slug: post.slug }}"
-                          class="text-gray-600 hover:text-gray-900 text-sm"
-                        >
-                          {{ post.title }}
-                        </router-link>
-                      </li>
-                    </ul>
-                  </section>
-
-                  <!-- Popular tags -->
-                  <section class="bg-white rounded-lg shadow-sm p-6">
-                    <h2 class="text-lg font-medium text-gray-900 mb-4">热门标签</h2>
-                    <div class="flex flex-wrap gap-2">
-                      <router-link
-                        v-for="tag in popularTags"
-                        :key="tag"
-                        :to="{ name: 'tags' }"
-                        class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm hover:bg-gray-200"
-                      >
-                        {{ tag }}
-                      </router-link>
-                    </div>
-                  </section>
-                </div>
-              </aside>
+              <RightSidebar />
             </div>
           </div>
         </div>
